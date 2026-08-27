@@ -24,10 +24,10 @@ A system for handwritten answer recognition, plagiarism detection, and rubric-ba
 
 ## Setup
 
-\```
+```
 py -3.12 -m venv venv
 venv\Scripts\activate
 pip install -r requirements.txt
-\```
+```
 
 (`requirements.txt` will be added as dependencies are introduced.)
