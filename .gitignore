@@ -6,3 +6,9 @@ data/
 .vscode/
 *.log
 mlruns/
+
+trocr_finetuned_checkpoints/
+trocr_finetuned_final/
+*.pt
+*.bin
+*.safetensors
