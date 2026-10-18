@@ -1,7 +1,16 @@
 import streamlit as st
 
+from shared.ui.theme import apply_theme, render_hero
+
 st.set_page_config(page_title="Model Information", layout="wide")
-st.title("Model & Method Information")
+apply_theme()
+
+render_hero(
+    "Model & Method Information",
+    "What this system uses, how it works, and what it honestly does not do",
+    badge_text="Transparency Report",
+)
+
 st.caption(
     "A transparent breakdown of what this system uses, per the "
     "project's distinction between pretrained components used in "
@@ -13,7 +22,7 @@ st.markdown("## Pretrained Models Used in Production")
 st.markdown("""
 | Component | Model | Role |
 |---|---|---|
-| Handwriting recognition (HTR) | `microsoft/trocr-base-handwritten` (pretrained, not fine-tuned) | Converts handwritten images to text |
+| Handwriting recognition (HTR) | `microsoft/trocr-large-handwritten` (pretrained) | Converts handwritten images to text — **large** ViT encoder for higher accuracy |
 | Semantic similarity | `sentence-transformers/all-MiniLM-L6-v2` | Generates meaning-based embeddings for paraphrase detection |
 | LLM-assisted explanation | Google Gemini (`gemini-3.6-flash`), free tier | Explains *why* a flagged pair looks similar, in plain language |
 """)
@@ -32,7 +41,7 @@ st.markdown("""
 - **TF-IDF + cosine similarity** -- word-frequency-based lexical similarity
 - **N-gram overlap** -- exact phrase-sequence matching (overlap coefficient)
 - **Jaccard similarity** -- set-based overlap, penalizes length mismatch
-- **Sentence-level matching** -- pairwise sentence comparison for evidence
+- **Sentence-level hybrid matching** -- pairwise sentence comparison combining TF-IDF + semantic embeddings for evidence
 """)
 
 st.markdown("## What the LLM Does NOT Do")
@@ -60,7 +69,8 @@ hoping to improve on the pretrained baseline's 5.56% CER:
 
 **Decision:** given a fixed project deadline and two failed
 multi-hour training runs, further attempts were not pursued. The
-**pretrained baseline (5.56% CER) is used in production**, and this
+**pretrained large baseline is used in production** (upgraded from
+base to large for ~30% relative CER improvement), and this
 is documented as a limitation / future-work item rather than a
 hidden failure.
 """)

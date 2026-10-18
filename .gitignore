@@ -1,17 +1,35 @@
 venv/
+
+# Python cache
 __pycache__/
+**/__pycache__/
 *.pyc
+*.pyo
+
+# Generated data and reports
 data/*
 !data/test_samples/
 data/test_samples/*
 !data/test_samples/*.png
+
+# Secrets
 .env
+
+# Editor
 .vscode/
+.idea/
+
+# Logs
 *.log
 mlruns/
 
+# Model weights (large binary files -- not committed)
 trocr_finetuned_checkpoints/
 trocr_finetuned_final/
 *.pt
 *.bin
 *.safetensors
+
+# OS
+.DS_Store
+Thumbs.db
